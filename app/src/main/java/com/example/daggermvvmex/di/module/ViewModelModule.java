@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.daggermvvmex.di.util.ViewModelKey;
+import com.example.daggermvvmex.ui.list.DetailViewModel;
 import com.example.daggermvvmex.ui.list.ListViewModel;
 import com.example.daggermvvmex.util.ViewModelFactory;
 
@@ -22,11 +23,10 @@ public abstract class ViewModelModule {
     @ViewModelKey(ListViewModel.class)
     abstract ViewModel bindListViewModel(ListViewModel listViewModel);
 
-   /* @Binds
+    @Binds
     @IntoMap
-    @ViewModelKey(DetailsViewModel.class)
-    abstract ViewModel bindDetailsViewModel(DetailsViewModel detailsViewModel);
-*/
+    @ViewModelKey(DetailViewModel.class)
+    abstract ViewModel bindDetailsViewModel(DetailViewModel detailsViewModel);
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);
 }

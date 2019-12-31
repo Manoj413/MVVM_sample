@@ -9,6 +9,7 @@ import java.util.Observable;
 import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface RepoService
 {
@@ -16,4 +17,7 @@ public interface RepoService
 
     @GET("orgs/Google/repos")
     Single<List<Movie>> getartistData();
+
+    @GET("repos/{owner}/{name}")
+    Single<Movie> getRepo(@Path("owner") String owner, @Path("name") String name);
 }

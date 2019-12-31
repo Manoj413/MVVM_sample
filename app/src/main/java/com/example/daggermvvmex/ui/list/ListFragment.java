@@ -50,7 +50,7 @@ public class ListFragment extends BaseFragment implements RepoSelectedListener {
         return R.layout.lay_list_fragment;
     }
 
-    @Override
+   /* @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel.class);
 
@@ -66,13 +66,13 @@ public class ListFragment extends BaseFragment implements RepoSelectedListener {
                 }
             }
         });
-    }
+    }*/
 
-   /* @Override
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lay_list_fragment,container,false);
 
-       // recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel.class);
         viewModel.getRepos().observe(this, new Observer<List<Movie>>() {
@@ -89,7 +89,7 @@ public class ListFragment extends BaseFragment implements RepoSelectedListener {
         });
 
         return view;
-    }*/
+    }
 
     private void setAdapter(List<Movie> movies) {
 
@@ -98,20 +98,18 @@ public class ListFragment extends BaseFragment implements RepoSelectedListener {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        repoListAdapter=new RepoListAdapter(getContext(),movies);
-       // layoutManager = new LinearLayoutManager(getContext());
-       // recyclerView.setLayoutManager(layoutManager);
+        repoListAdapter=new RepoListAdapter(getContext(),movies,this);
         recyclerView.setAdapter(repoListAdapter);
-
-
-       /* recyclerView.setAdapter(new RepoListAdapter(getContext(),movies);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));*/
     }
 
 
 
     @Override
     public void onRepoSelected(Movie movie) {
+        DetailViewModel detailsViewModel = ViewModelProviders.of(getBaseActivity(), viewModelFactory).get(DetailViewModel.class);
+        detailsViewModel.setSelectedRepo(movie);
+        getBaseActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new DetailFragment())
+                .addToBackStack(null).commit();
 
     }
 

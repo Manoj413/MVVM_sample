@@ -21,5 +21,9 @@ public class RepoRepository {
         return repoService.getartistData();
     }
 
+    public Single<Movie> getRepo(String owner, String name) {
+        return repoService.getRepo(owner, name);
+    }
+
 
 }

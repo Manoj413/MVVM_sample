@@ -45,9 +45,10 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.ViewHo
         setHasStableIds(true);
     }
 
-    public RepoListAdapter(Context context, List<Movie> data) {
+    public RepoListAdapter(Context context, List<Movie> data,RepoSelectedListener repoSelectedListener) {
         this.repoSelectedListener = repoSelectedListener;
         this.data = data;
+        this.repoSelectedListener = repoSelectedListener;
     }
 
 
@@ -94,15 +95,16 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.ViewHo
             ButterKnife.bind(this, itemView);
             artistName = itemView.findViewById(R.id.artistName);
             movieName = itemView.findViewById(R.id.movieName);
+            cardView = itemView.findViewById(R.id.cadView);
 
-           /* cardView.setOnClickListener(new View.OnClickListener() {
+            cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (movie != null) {
                         repoSelectedListener.onRepoSelected(movie);
                     }
                 }
-            });*/
+            });
         }
 
         void bind(Movie movie) {
